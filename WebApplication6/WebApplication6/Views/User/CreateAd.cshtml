@@ -1,0 +1,148 @@
+﻿@model WebApplication6.Models.tbl_product
+@{
+
+}
+
+<style>
+    #box {
+        border: 1px solid black;
+        height: 100%;
+    }
+
+    #main-div {
+        height: 900px;
+        background-image: url('../../Content/img/mardin5.jpg');
+        background-size: 100% 900px;
+    }
+
+    .insidebox {
+        border: 1px solid black;
+        margin: 10% auto 10% auto;
+        max-width: 500px;
+        min-width: 200px;
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 10px;
+        background-color: whitesmoke;
+    }
+
+    div h1 {
+        text-align: center;
+    }
+
+    p#para {
+        text-align: center;
+        font-size: 14px;
+    }
+</style>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+
+<script src="js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<div id="main-div">
+    <div id="box" class="img-responsive">
+        @using (Html.BeginForm("CreateAd",
+                        "User",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+        {
+            <div class="insidebox">
+                <div> <h1>İlan Ver!</h1></div>
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                        @Html.DropDownListFor(x => x.pro_fk_cat, ViewBag.categorylist as SelectList, "--select--", new { @class = "form-control" })
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_fk_cat) </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        @Html.TextBoxFor(x => x.pro_name, new { @class = "form-control", @placeholder = "Ürün Adı" })
+
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_name) </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        @Html.TextBoxFor(x => x.pro_prince, new { @class = "form-control", @placeholder = "Fiyatı" })
+
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_prince) </span>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        @Html.TextBoxFor(x => x.pro_des, new { @class = "form-control", @placeholder = "Tanım" })
+
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_des) </span>
+
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+
+                        <input type="file" name="imgfile" id="imgfile" class="form-control" required="required" />
+
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <input type="submit" value="Ekle" class="btn btn-success btn-block" />
+
+                </div>
+
+                <div class="form-group">
+                    <p style="color:red">@ViewBag.error</p>
+                </div>
+
+
+
+            </div>
+
+        }
+    </div>
+
+</div>
+
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

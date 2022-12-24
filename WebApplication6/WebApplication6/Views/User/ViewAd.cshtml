@@ -1,0 +1,75 @@
+﻿@model WebApplication6.Models.Adviewmodel
+@{
+    ViewBag.Title = "ViewAd";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<style>
+    td {
+        padding: 20px;
+    }
+    .col-lg-2{
+        top:50px;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <img src="~/Content/img/mardin6.1.jpg" class="img img-responsive" style="width:100%" />
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-2 col-md-2">
+        <img src="~/Content/img/mardin4.1.jpg" class="img img-responsive" style=" width:500px;" />
+    </div>
+
+
+
+    <div class="col-lg-8 col-md-8">
+
+        <div>
+            <h1>@Model.pro_name <small>AD-ID:@Model.pro_id</small></h1>
+        </div>
+
+        <img src="@Url.Content(@Model.pro_image)" style="width:800PX; height:450PX" />
+
+        <div>
+            <h1>Açıklama </h1>
+            <p>@Model.pro_des</p>
+        </div>
+
+        <table>
+
+            <tr> <td>Fiyat: </td> <td>@Model.pro_prince </td> </tr>
+            <tr> <td>Kategori: </td> <td>@Model.cat_name </td> </tr>
+            <tr> <td>İlan veren: </td> <td>@Model.u_name <img src="@Url.Content(@Model.u_image)" style="width:80px; height:80px" /> </td> </tr>
+            <tr> <td>iletişim </td> <td>@Model.u_contact  </td> </tr>
+            <tr>
+                <td colspan="2">
+                    @if (Convert.ToInt32(Session["u_id"]) == Convert.ToInt32(Model.pro_fk_user))
+                    {
+
+                        @Html.ActionLink("Bu ilanı Kapat", "DeleteAd", new { @class = "btn btn-info", id = Model.pro_id })
+
+
+
+                    }
+                </td>
+            </tr>
+
+        </table>
+
+
+
+    </div>
+
+
+
+
+    <div class="col-lg-2 col-md-2">
+        <img src="~/Content/img/mardin4.1.jpg" class="img img-responsive" style=" width:500px;" />
+    </div>
+
+
+</div>

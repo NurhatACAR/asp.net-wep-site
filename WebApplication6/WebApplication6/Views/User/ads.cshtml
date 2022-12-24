@@ -1,0 +1,115 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<WebApplication6.Models.tbl_product>
+
+@{
+    ViewBag.Title = "Ads";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<style>
+    .cimg {
+        -webkit-transform 5s;
+        transition: transform 5s;
+    }
+
+        .cimg:hover {
+            -webkit-transform: rotatez(360deg);
+        }
+    .col-lg-2 {
+        top:50px;
+    }
+</style>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View  Category</title>
+    <link href="~/Content/paginition.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="height:1150px; ">
+        <div class="row">
+            <div class="col-lg-12" style="height:100px; border:1px solid solid; ">
+
+
+                <img src="~/Content/img/mardin2.jpg" style="width:100%; height:100%" />
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row" style="margin-bottom:40px">
+
+            <div class="col-lg-2 col-md-2">
+                <img src="~/Content/img/mardin4.jpg" class="img img-responsive" style="width:100%; height:100%" />
+            </div>
+
+            <div class="col-lg-8 col-md-8">
+
+                @using (@Html.BeginForm("Ads", "User"))
+                {
+                    <div class="navbar-form ">
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" placeholder="Ara" name="search" id="search">
+                        </div>
+                        <button type="submit" class="btn btn-success">Ara</button>
+                    </div>
+                }
+
+
+
+                <div class="row">
+                    @{int x = 0;}
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            x++;
+                            <div class="col-lg-4 col-md-4" style="height:200px;margin-top:100px">
+
+                                <img class="img img-responsive cimg" src="@Url.Content(item.pro_image)" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
+                                <h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> @Html.ActionLink(@item.pro_name, "ViewAd", new { id = @item.pro_id })</h4>
+
+                            </div>
+
+                        }
+                    }
+
+                    <h4>@x Sonuç Bulundu</h4>
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 col-md-2">
+                <img src="~/Content/img/mardin4.jpg" class="img img-responsive" style="width:100%; height:100%" />
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Ads", new { page }))
+        </div>
+    </div>
+</body>
+</html>
